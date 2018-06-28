@@ -1,7 +1,21 @@
 <app-toolbar [title]="'Angular'"></app-toolbar>
 
+
+<app-week></app-week>
+
 <h2>Galeria</h2>
 
 
 <!-- <app-card *ngFor="let d of data" [menu]="d"></app-card> -->
 
+<div class="row" *ngIf="!loading; else cargando">
+    <div class="item" *ngFor="let d of data">
+        <app-card [menu]="d" (selected)=showName($event)></app-card>
+    </div>
+</div>
+
+<ng-template #cargando>
+    Cargando ....
+</ng-template>
+
+<div class="btn-add">+</div>

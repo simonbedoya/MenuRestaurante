@@ -1,7 +1,7 @@
-<div class=card>
+<div class="card" (click)="onClick()">
   <img src="{{menu.img}}"/>
   <div>
     <h4>{{menu.chef}}</h4>
-    <p>{{menu.date}}</p>
+    <p>{{menu.date | fecha :'mm/dd/YYYY' :3}}</p>
   </div>  
 </div>

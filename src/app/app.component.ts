@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { MenuService, Menu } from './services/menu.service';
+import { WeekService, Day } from './services/week.service';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   // Etiqueta para utilizar el componente
@@ -16,8 +18,19 @@ import { MenuService, Menu } from './services/menu.service';
 export class AppComponent {
   title = 'Simon';
   data: Menu[] = [];
+  dataWeek: Day[] = [];
+  loading = false;
 
-  constructor(service: MenuService) {
-    service.loadMenu().subscribe(x => this.data = x);
+  constructor(serviceMenu: MenuService) {
+    this.loading = true;
+    serviceMenu.loadMenu()
+      .pipe(
+        finalize(() => this.loading = false)
+      )
+      .subscribe(x => this.data = x, err => console.log(err));
+  }
+
+  showName(menu: Menu) {
+    alert(menu.chef);
   }
 }
