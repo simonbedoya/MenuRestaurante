@@ -1,0 +1,12 @@
+<app-toolbar [title]="'Agregar Menu'"></app-toolbar>
+
+<form #formMenu="ngForm">
+    <input #chef="ngModel" placeholder="Nombre del Chef" name="Chef" type="text" maxlength="30" required [(ngModel)]="menu.chef"/> <br>
+
+    <p class="error" *ngIf="chef.invalid && chef.dirty"> Nombre obligatorio y de 30 letras</p>
+    <input #img="ngModel" placeholder="Url de Imagen" name="img" type="text" required [(ngModel)]="menu.img"/><br>
+
+    <Button [disabled]="formMenu.invalid" (click)="addMenu()">Agregar</Button>
+</form>
+
+<p>{{ menu | json }}</p>
